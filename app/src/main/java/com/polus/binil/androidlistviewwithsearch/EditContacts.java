@@ -65,7 +65,7 @@ public class EditContacts extends Activity {
     Bitmap contact_bitmap;
     Boolean imageflag = false;
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,8 +85,9 @@ public class EditContacts extends Activity {
 
         Bundle extras = getIntent().getExtras();
         String name = extras.getString("name");
+        String number = extras.getString("number");
         txt_contact_name.setText(name);
-
+        txt_contactNumber.setText(number);
         ContentResolver cr = getContentResolver();
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null,
                 "DISPLAY_NAME = '" + name + "'", null, null);
@@ -175,7 +176,7 @@ public class EditContacts extends Activity {
                     }
                 }
                 pCur.close();
-                txt_contactNumber.setText(phoneNumber);
+
                 if(!email.equalsIgnoreCase("")) {
                     txt_contactEmail.setText(email);
                 }

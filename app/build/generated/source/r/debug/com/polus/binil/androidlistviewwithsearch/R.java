@@ -17,15 +17,17 @@ public final class R {
     }
     public static final class drawable {
         public static final int button_background=0x7f020000;
-        public static final int contact_avatar=0x7f020001;
-        public static final int delete_white=0x7f020002;
-        public static final int edit=0x7f020003;
-        public static final int edit_name=0x7f020004;
-        public static final int ic_action_search=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
-        public static final int un_known_avtar=0x7f020007;
+        public static final int call_phone=0x7f020001;
+        public static final int contact_avatar=0x7f020002;
+        public static final int delete_white=0x7f020003;
+        public static final int edit=0x7f020004;
+        public static final int edit_name=0x7f020005;
+        public static final int ic_action_search=0x7f020006;
+        public static final int ic_launcher=0x7f020007;
+        public static final int un_known_avtar=0x7f020008;
     }
     public static final class id {
+        public static final int callIcon=0x7f080012;
         public static final int contact_email=0x7f080005;
         public static final int contact_image=0x7f080002;
         public static final int contact_name=0x7f080003;
@@ -39,7 +41,7 @@ public final class R {
         public static final int insertContacts=0x7f080006;
         public static final int item_icon=0x7f080010;
         public static final int list_view=0x7f080001;
-        public static final int menu_settings=0x7f080012;
+        public static final int menu_settings=0x7f080013;
         public static final int name=0x7f080011;
         public static final int txt_contactEmail=0x7f08000c;
         public static final int txt_contactNumber=0x7f080009;

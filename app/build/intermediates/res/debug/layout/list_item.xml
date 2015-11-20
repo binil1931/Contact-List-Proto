@@ -34,5 +34,14 @@
 
         android:layout_centerVertical="true"
         android:textSize="20dp" />
-
+    <ImageView
+        android:id="@+id/callIcon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:padding="20dp"
+        android:contentDescription="icon"
+        android:src="@drawable/call_phone"
+        />
 </RelativeLayout><!-- From: file:/E:/Project%20Details/Hd%20Dailer/proto/Working%20Proto/ContactListProto/app/src/main/res/layout/list_item.xml -->

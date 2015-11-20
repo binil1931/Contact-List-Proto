@@ -2,6 +2,7 @@ package com.polus.binil.androidlistviewwithsearch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import android.app.Activity;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
@@ -40,6 +42,8 @@ public class MainActivity extends Activity {
             ContactsContract.Contacts.DISPLAY_NAME,
             ContactsContract.CommonDataKinds.Phone.NUMBER
     };
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,14 +66,21 @@ public class MainActivity extends Activity {
                 final int nameIndex = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
                 final int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 
+                int phonetype = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
                 String nameContact, number;
                 while (cursor.moveToNext()) {
+
+
                     nameContact = cursor.getString(nameIndex);
-                    // itemsData.add(new ItemData(name));
-                    ItemListPogo wp = new ItemListPogo( nameContact );
+                    number = cursor.getString(numberIndex);
+                   // type  = cursor.getString(phonetype);
+                    // itemsData.add(new ItemData(name));//
+                    ItemListPogo wp = new ItemListPogo( nameContact ,number);
                     arraylist.add(wp);
 
                 }
+
+
             } finally {
                 cursor.close();
             }
@@ -113,6 +124,7 @@ public class MainActivity extends Activity {
         startActivity(i);
 
     }
+
 
     @Override
     protected void onResume() {

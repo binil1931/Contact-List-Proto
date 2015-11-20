@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ListViewAdapter extends BaseAdapter {
@@ -36,6 +38,7 @@ public class ListViewAdapter extends BaseAdapter {
 
 		TextView product_name;
 		TextView name;
+        ImageView callIcon;
 	}
 
 	@Override
@@ -63,6 +66,7 @@ public class ListViewAdapter extends BaseAdapter {
             
 
 			holder.name     = (TextView) view.findViewById(R.id.name);
+            holder.callIcon        = (ImageView) view.findViewById(R.id.callIcon);
 			
 			view.setTag(holder);
 		} 
@@ -73,7 +77,15 @@ public class ListViewAdapter extends BaseAdapter {
 
 		// Set the results into TextViews
 		holder.name.setText(itemListPogo.get(position).getItemName());
+        holder.callIcon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                Log.e("Tag ","clciked "+itemListPogo.get(position).getItemNumber());
+                Toast.makeText(mContext,"call "+ itemListPogo.get(position).getItemNumber(),Toast.LENGTH_LONG).show();
+            }
+        });
 
 		view.setOnClickListener(new OnClickListener() {
 
@@ -85,6 +97,7 @@ public class ListViewAdapter extends BaseAdapter {
 
                 Intent i = new Intent(mContext,EditContacts.class);
                 i.putExtra("name", itemListPogo.get(position).getItemName());
+                i.putExtra("number", itemListPogo.get(position).getItemNumber());
                ((Activity)mContext).finish();
                ((Activity)mContext).startActivity(i);
             }
