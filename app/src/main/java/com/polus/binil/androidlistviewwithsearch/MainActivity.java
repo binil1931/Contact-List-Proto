@@ -42,7 +42,8 @@ public class MainActivity extends Activity {
             ContactsContract.Contacts.DISPLAY_NAME,
             ContactsContract.CommonDataKinds.Phone.NUMBER
     };
-
+   String prevName = null;
+   String prevNumber = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,16 +68,66 @@ public class MainActivity extends Activity {
                 final int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
 
                 int phonetype = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE);
-                String nameContact, number;
+                String nameContact, number,currentNumber;
                 while (cursor.moveToNext()) {
 
 
-                    nameContact = cursor.getString(nameIndex);
-                    number = cursor.getString(numberIndex);
-                   // type  = cursor.getString(phonetype);
-                    // itemsData.add(new ItemData(name));//
-                    ItemListPogo wp = new ItemListPogo( nameContact ,number);
-                    arraylist.add(wp);
+                        if(prevName != null)
+                    {
+                        currentNumber = cursor.getString(numberIndex).trim();
+                        currentNumber = currentNumber.replace(" ", "");
+                        currentNumber = currentNumber.replaceAll("[(]", "");
+                        currentNumber = currentNumber.replaceAll("[)]", "");
+
+                        Log.e("Tag ","prevName "+ prevName);
+                        Log.e("Tag ","prevNumber "+ prevNumber);
+                        if(!prevName.equals(cursor.getString(nameIndex)) && !prevNumber.equals(currentNumber))
+                        {
+                            nameContact = cursor.getString(nameIndex);
+                            number = currentNumber;
+
+
+                            Log.e("Tag ","contact if "+ nameContact);
+                            Log.e("Tag ","contact if "+ number);
+
+                            prevName = cursor.getString(nameIndex);
+                            prevNumber = currentNumber;
+                            ItemListPogo wp = new ItemListPogo( nameContact ,number);
+                            arraylist.add(wp);
+                        }
+                        else if(!prevNumber.equals(currentNumber))
+                        {
+                            nameContact = cursor.getString(nameIndex);
+                            number = currentNumber;
+
+
+                            Log.e("Tag ","contact else if "+ nameContact);
+
+                            Log.e("Tag ","contact else if "+ number);
+
+                            prevName = cursor.getString(nameIndex);
+                            prevNumber = currentNumber;
+                            ItemListPogo wp = new ItemListPogo( nameContact ,number);
+                            arraylist.add(wp);
+
+                        }
+
+                    }
+                    else
+                    {
+
+                        i++;
+                        nameContact = cursor.getString(nameIndex);
+                        number = cursor.getString(numberIndex);
+                       // Log.e("Tag ","contact null  contdition "+i+""+ nameContact);
+                        prevName = cursor.getString(nameIndex);
+                        prevNumber = cursor.getString(numberIndex);
+                       // Log.e("Tag ","contact null  contdition  prevName "+ prevName);
+                        //Log.e("Tag ","contact null  contdition  prevNumber "+ prevNumber);
+                        ItemListPogo wp = new ItemListPogo( nameContact ,number);
+                        arraylist.add(wp);
+
+                    }
 
                 }
 
