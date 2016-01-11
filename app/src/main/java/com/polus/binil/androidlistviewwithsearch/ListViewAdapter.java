@@ -107,21 +107,48 @@ public class ListViewAdapter extends BaseAdapter {
 	}
 
 	// Filter Class
-	public void filter(String charText) 
+
+	public void filter(String charText)
 	{
 		charText = charText.toLowerCase(Locale.getDefault());
+		Log.e("Tag ", "search " + charText);
 		itemListPogo.clear();
-
-		if (charText.length() == 0) 
+		int spaceCount = 0;
+		for (char c : charText.toCharArray()) {
+			if (c == ' ') {
+				spaceCount++;
+			}
+		}
+		if (charText.length() == 0)
 		{
 			itemListPogo.addAll(arraylist);
-		} 
+		}
 		else
 		{
-			for (ItemListPogo wp : arraylist) 
+			for (ItemListPogo wp : arraylist)
 			{
-                String[] splited = wp.getItemName().split("\\s+");
-                int n = splited.length;
+				try {
+					if(spaceCount > 0)
+					{
+						if (wp.getItemName().toLowerCase(Locale.getDefault())
+								.startsWith(charText))
+						{
+
+
+							itemListPogo.add(wp);
+						}
+					}
+					else
+					{
+						String[] splited = wp.getItemName().split("\\s+");
+						int n = splited.length;
+						for (int i = 0; i < n; i++) {
+							if (splited[i].toLowerCase(Locale.getDefault()).startsWith(charText)) {
+								itemListPogo.add(wp);
+							}
+						}
+					}
+
 				/* if (wp.getItemName().toLowerCase(Locale.getDefault())
 						.startsWith(charText))
 				{
@@ -129,13 +156,16 @@ public class ListViewAdapter extends BaseAdapter {
 
 					itemListPogo.add(wp);
 				}*/
-                for(int i = 0;i < n ; i++)
-                {
-                    if (splited[i].toLowerCase(Locale.getDefault()).startsWith(charText))
-                    {
-                        itemListPogo.add(wp);
-                    }
-                }
+
+				}
+				catch (NullPointerException e)
+				{
+
+				}
+				catch (Exception e)
+				{
+
+				}
 			}
 		}
 		notifyDataSetChanged();
